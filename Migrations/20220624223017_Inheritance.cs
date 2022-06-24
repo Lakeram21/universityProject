@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ContosoUniversity.Migrations
 {
-    public partial class ComplexDataModel : Migration
+    public partial class Inheritance : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,11 +13,11 @@ namespace ContosoUniversity.Migrations
                 name: "Instructor",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    LastName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    FirstName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    HireDate = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    HireDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,11 +28,11 @@ namespace ContosoUniversity.Migrations
                 name: "Student",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    LastName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    FirstName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    EnrollmentDate = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    EnrollmentDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -43,12 +43,13 @@ namespace ContosoUniversity.Migrations
                 name: "Department",
                 columns: table => new
                 {
-                    DepartmentID = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
+                    DepartmentID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Budget = table.Column<decimal>(type: "money", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    InstructorID = table.Column<int>(type: "INTEGER", nullable: true)
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    InstructorID = table.Column<int>(type: "int", nullable: true),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -64,8 +65,8 @@ namespace ContosoUniversity.Migrations
                 name: "OfficeAssignment",
                 columns: table => new
                 {
-                    InstructorID = table.Column<int>(type: "INTEGER", nullable: false),
-                    Location = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false)
+                    InstructorID = table.Column<int>(type: "int", nullable: false),
+                    Location = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -82,10 +83,10 @@ namespace ContosoUniversity.Migrations
                 name: "Course",
                 columns: table => new
                 {
-                    CourseID = table.Column<int>(type: "INTEGER", nullable: false),
-                    Title = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    Credits = table.Column<int>(type: "INTEGER", nullable: false),
-                    DepartmentID = table.Column<int>(type: "INTEGER", nullable: false)
+                    CourseID = table.Column<int>(type: "int", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Credits = table.Column<int>(type: "int", nullable: false),
+                    DepartmentID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -102,8 +103,8 @@ namespace ContosoUniversity.Migrations
                 name: "CourseAssignment",
                 columns: table => new
                 {
-                    InstructorID = table.Column<int>(type: "INTEGER", nullable: false),
-                    CourseID = table.Column<int>(type: "INTEGER", nullable: false)
+                    InstructorID = table.Column<int>(type: "int", nullable: false),
+                    CourseID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -126,11 +127,11 @@ namespace ContosoUniversity.Migrations
                 name: "Enrollment",
                 columns: table => new
                 {
-                    EnrollmentID = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    CourseID = table.Column<int>(type: "INTEGER", nullable: false),
-                    StudentID = table.Column<int>(type: "INTEGER", nullable: false),
-                    Grade = table.Column<int>(type: "INTEGER", nullable: true)
+                    EnrollmentID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CourseID = table.Column<int>(type: "int", nullable: false),
+                    StudentID = table.Column<int>(type: "int", nullable: false),
+                    Grade = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
